@@ -31,5 +31,21 @@ namespace Mood_Analyzer_Testing
             string Returned_Message = analyze.MoodAnalyzer();
             Assert.AreEqual("HAPPY", Returned_Message);
         }
+        /// <summary>
+        /// TC 2: Given Null Mood Should Return Happy
+        /// </summary>
+        [Test]
+        public void When_Given_NULL_Should_Return_HAPPY()
+        {
+            string Returned_Message = analyze.MoodAnalyzer();
+            Assert.AreEqual("HAPPY", Returned_Message);
+        }
+        [Test]
+        public void When_Given_EMPTY_Message_Should_Return_HAPPY()
+        {
+            analyze = new Mood_Analyzer_Program("");
+            string Returned_Message = analyze.MoodAnalyzer();
+            Assert.AreEqual("HAPPY", Returned_Message);
+        }
     }
 }

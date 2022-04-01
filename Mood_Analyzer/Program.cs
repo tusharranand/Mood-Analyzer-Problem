@@ -15,9 +15,18 @@ namespace Mood_Analyzer
         }
         public string MoodAnalyzer()
         {
-            if (Message.ToUpper().Contains("SAD"))
-                return "SAD";
-            else return "HAPPY";
+            try
+            {
+                if (Message.Equals(string.Empty))
+                    return "HAPPY";
+                else if (Message.ToUpper().Contains("SAD"))
+                    return "SAD";
+                else return "HAPPY";
+            }
+            catch (NullReferenceException Exception)
+            {
+                return "HAPPY";
+            }
         }
         public static void Main(string[] args){}
     }
