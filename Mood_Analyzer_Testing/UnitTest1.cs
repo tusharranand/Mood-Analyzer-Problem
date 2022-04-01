@@ -17,7 +17,8 @@ namespace Mood_Analyzer_Testing
         [Test]
         public void When_Given_Sad_Message_Should_Return_SAD()
         {
-            string Returned_Message = analyze.MoodAnalyzer("I am in sad mood");
+            analyze = new Mood_Analyzer_Program("I am in sad mood");
+            string Returned_Message = analyze.MoodAnalyzer();
             Assert.AreEqual("SAD", Returned_Message);
         }
         /// <summary>
@@ -26,7 +27,8 @@ namespace Mood_Analyzer_Testing
         [Test]
         public void When_Given_Any_Message_Should_Return_HAPPY()
         {
-            string Returned_Message = analyze.MoodAnalyzer("I am in any mood");
+            analyze = new Mood_Analyzer_Program("I am in any mood");
+            string Returned_Message = analyze.MoodAnalyzer();
             Assert.AreEqual("HAPPY", Returned_Message);
         }
     }
