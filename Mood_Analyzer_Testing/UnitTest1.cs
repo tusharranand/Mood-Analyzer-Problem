@@ -1,3 +1,4 @@
+using System;
 using Mood_Analyzer;
 using NUnit.Framework;
 
@@ -6,6 +7,7 @@ namespace Mood_Analyzer_Testing
     public class Tests
     {
         Mood_Analyzer_Program analyze;
+        
         [SetUp]
         public void Setup()
         {
@@ -33,19 +35,37 @@ namespace Mood_Analyzer_Testing
         }
         /// <summary>
         /// TC 2: Given Null Mood Should Return Happy
+        /// TC 3.1: Given NULL Mood Should Throw "Mood can not be Empty"
         /// </summary>
         [Test]
-        public void When_Given_NULL_Should_Return_HAPPY()
+        public void When_Given_NULL_Should_Return_Custom_Null_Message()
         {
-            string Returned_Message = analyze.MoodAnalyzer();
-            Assert.AreEqual("HAPPY", Returned_Message);
+            try
+            {
+                string Message = null;
+                analyze = new Mood_Analyzer_Program(Message);
+            }
+            catch (NullReferenceException Exception)
+            {
+                Assert.AreEqual("Mood can not be Null.", Exception.Message);
+            }
         }
+        /// <summary>
+        /// TC 3.2: Given NULL Mood Should Throw "Mood can not be Empty"
+        /// </summary>
         [Test]
-        public void When_Given_EMPTY_Message_Should_Return_HAPPY()
+        public void When_Given_EMPTY_Message_Should_Return_Custom_Empty_Message()
         {
-            analyze = new Mood_Analyzer_Program("");
-            string Returned_Message = analyze.MoodAnalyzer();
-            Assert.AreEqual("HAPPY", Returned_Message);
+            try
+            {
+                analyze = new Mood_Analyzer_Program("");
+                string Returned_Message = analyze.MoodAnalyzer();
+                Assert.AreEqual("HAPPY", Returned_Message);
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Mood can not be Empty.", Exception.Message);
+            }
         }
     }
 }

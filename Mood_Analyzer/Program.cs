@@ -18,16 +18,20 @@ namespace Mood_Analyzer
             try
             {
                 if (Message.Equals(string.Empty))
-                    return "HAPPY";
+                    throw new MA_Custom_Exceptions(MA_Custom_Exceptions.Exception_Type.EMPTY_MOOD, "Mood can not be Empty.");
                 else if (Message.ToUpper().Contains("SAD"))
                     return "SAD";
                 else return "HAPPY";
             }
-            catch (NullReferenceException Exception)
+            catch (NullReferenceException)
             {
-                return "HAPPY";
+                //return "HAPPY";
+                throw new MA_Custom_Exceptions(MA_Custom_Exceptions.Exception_Type.NULL_MOOD, "Mood can not be Null.");
             }
         }
-        public static void Main(string[] args){}
+        public static void Main(string[] args)
+        {
+
+        }
     }
 }
