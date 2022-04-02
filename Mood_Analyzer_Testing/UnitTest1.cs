@@ -109,5 +109,45 @@ namespace Mood_Analyzer_Testing
                 Assert.AreEqual("Constructor not found", Exception.Message);
             }
         }
+        /// <summary>
+        /// TC 5.1: Given Mood_Analyzer_Program Class Name Should Return Mood_Analyzer_Program Object using Parameterised Constructor
+        /// </summary>
+        [Test]
+        public void When_Given_ClassName_Should_Return_Object_Using_Parameter_Constructor()
+        {
+            object expected = new Mood_Analyzer_Program();
+            object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze_Parameter_Constructor("Mood_Analyzer.Mood_Analyzer_Program", "Mood_Analyzer_Program");
+            expected.Equals(returned);
+        }
+        /// <summary>
+        /// TC 5.2: When given improper class name should throw "Class not found" exception using Parameterised Constructor
+        /// </summary>
+        [Test]
+        public void When_Given_Improper_ClassName_Should_Throw_Exception_Using_Parameter_Constructor()
+        {
+            try
+            {
+                object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze_Parameter_Constructor("Mood_Analyzer.Mood", "Mood");
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Class not found", Exception.Message);
+            }
+        }
+        /// <summary>
+        /// TC 5.3: When given improper constructor name should throw "Constructor not found" exception using Parameterised Constructor
+        /// </summary>
+        [Test]
+        public void When_Given_Improper_ConstuctorName_Should_Throw_Exception_Using_Parameter_Constructor()
+        {
+            try
+            {
+                object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze_Parameter_Constructor("Mood_Analyzer.Mood_Analyzer_Program", "Mood");
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Constructor not found", Exception.Message);
+            }
+        }
     }
 }
