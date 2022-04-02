@@ -7,11 +7,13 @@ namespace Mood_Analyzer_Testing
     public class Tests
     {
         Mood_Analyzer_Program analyze;
-        
+        Mood_Aanalyzer_Factory analyse_class;
+
         [SetUp]
         public void Setup()
         {
-           analyze = new Mood_Analyzer_Program();
+            analyze = new Mood_Analyzer_Program();
+            analyse_class = new Mood_Aanalyzer_Factory();
         }
         /// <summary>
         /// TC 1.1: Given “I am in Sad Mood” message Should Return SAD
@@ -45,7 +47,7 @@ namespace Mood_Analyzer_Testing
                 string Message = null;
                 analyze = new Mood_Analyzer_Program(Message);
             }
-            catch (NullReferenceException Exception)
+            catch (ArgumentNullException Exception)
             {
                 Assert.AreEqual("Mood can not be Null.", Exception.Message);
             }
@@ -65,6 +67,46 @@ namespace Mood_Analyzer_Testing
             catch (MA_Custom_Exceptions Exception)
             {
                 Assert.AreEqual("Mood can not be Empty.", Exception.Message);
+            }
+        }
+        /// <summary>
+        /// TC 4.1: Given Mood_Analyzer_Program Class Name Should Return Mood_Analyzer_Program Object
+        /// </summary>
+        [Test]
+        public void When_Given_ClassName_Should_Return_Object()
+        {
+            object expected = new Mood_Analyzer_Program();
+            object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze("Mood_Analyzer.Mood_Analyzer_Program", "Mood_Analyzer_Program");
+            expected.Equals(returned);
+        }
+        /// <summary>
+        /// TC 4.2: When given improper class name should throw "Class not found" exception
+        /// </summary>
+        [Test]
+        public void When_Given_Improper_ClassName_Should_Throw_Exception()
+        {
+            try
+            {
+                object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze("Mood_Analyzer.Mood", "Mood");
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Class not found", Exception.Message);
+            }
+        }
+        /// <summary>
+        /// TC 4.3: When given improper constructor name should throw "Constructor not found" exception
+        /// </summary>
+        [Test]
+        public void When_Given_Improper_ConstuctorName_Should_Throw_Exception()
+        {
+            try
+            {
+                object returned = Mood_Aanalyzer_Factory.CreateMoodAnalyze("Mood_Analyzer.Mood_Analyzer_Program", "Mood");
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Constructor not found", Exception.Message);
             }
         }
     }
