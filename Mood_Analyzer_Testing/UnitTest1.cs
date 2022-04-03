@@ -149,5 +149,29 @@ namespace Mood_Analyzer_Testing
                 Assert.AreEqual("Constructor not found", Exception.Message);
             }
         }
+        /// <summary>
+        /// TC 6.1: Given Happy Message Using Reflection When Proper Should Return HAPPY
+        /// </summary>
+        [Test]
+        public void When_Given_Proper_MessageThroughReflection_Should_Return_Happy()
+        {
+            string mood = Mood_Aanalyzer_Factory.invokeAnalyzeMood("Happy", "MoodAnalyzer");
+            Assert.AreEqual("HAPPY", mood);
+        }
+        /// <summary>
+        /// TC 6.2: Given Happy Message Using Reflection When Imroper Should Throw "Method not found" Exception
+        /// </summary>
+        [Test]
+        public void When_Given_Improper_MessageThroughReflection_Should_Throw_Exception()
+        {
+            try
+            {
+                string mood = Mood_Aanalyzer_Factory.invokeAnalyzeMood("Happy", "mood_analyser");
+            }
+            catch (MA_Custom_Exceptions Exception)
+            {
+                Assert.AreEqual("Method not found", Exception.Message);
+            }
+        }
     }
 }
