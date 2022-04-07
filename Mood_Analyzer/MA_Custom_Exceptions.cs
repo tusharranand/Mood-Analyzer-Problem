@@ -15,7 +15,8 @@ namespace Mood_Analyzer
             NULL_MOOD,
             NO_SUCH_CLASS,
             NO_SUCH_CONSTRUCTOR,
-            NO_SUCH_METHOD
+            NO_SUCH_METHOD,
+            NO_SUCH_FIELD
         }
         public MA_Custom_Exceptions(Exception_Type type, string Message) : base(Message)
         {

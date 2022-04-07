@@ -32,9 +32,10 @@ namespace Mood_Analyzer
                     return "SAD";
                 else return "HAPPY";
             }
-            catch (ArgumentNullException)
+            catch (NullReferenceException)
             {
                 //return "HAPPY";
+                //throw new NullReferenceException("Mood can not be Null.");
                 throw new MA_Custom_Exceptions(MA_Custom_Exceptions.Exception_Type.NULL_MOOD, "Mood can not be Null.");
             }
         }

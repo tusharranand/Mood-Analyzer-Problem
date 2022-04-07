@@ -46,8 +46,10 @@ namespace Mood_Analyzer_Testing
             {
                 string Message = null;
                 analyze = new Mood_Analyzer_Program(Message);
+                string Returned_Message = analyze.MoodAnalyzer();
+
             }
-            catch (ArgumentNullException Exception)
+            catch (NullReferenceException Exception)
             {
                 Assert.AreEqual("Mood can not be Null.", Exception.Message);
             }
@@ -171,6 +173,28 @@ namespace Mood_Analyzer_Testing
             catch (MA_Custom_Exceptions Exception)
             {
                 Assert.AreEqual("Method not found", Exception.Message);
+            }
+        }
+        /// <summary>
+        /// TC 7.1: Set Happy Message with Reflector Should Return HAPPY
+        /// TC 7.2: Set Field When Improper Should Throw Exception with No Such Field
+        /// TC 7.3: Setting Null Message with Reflector Should Throw Exception
+        /// </summary>
+        [TestCase("Happy", "MoodAnalyzer")]
+        [TestCase("Happy", "MoodAnalyze")]
+        [TestCase(null, "MoodAnalyzer")]
+        public void When_Given_Proper_DynamicMessageThroughReflection_Should_ReturnHappy_or_Throw_Exception(string Message, string FieldName)
+        {
+            try
+            {
+                string mood = Mood_Aanalyzer_Factory.SetField(Message, FieldName);
+                Assert.AreEqual("HAPPY", mood);
+            }
+            catch(MA_Custom_Exceptions Exception)
+            {
+                if (Exception.Message == "Field not Found")
+                    Assert.AreEqual("Field not Found", Exception.Message);
+                else Assert.AreEqual("Mood can not be null.", Exception.Message);
             }
         }
     }
